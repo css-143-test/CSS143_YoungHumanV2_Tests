@@ -1,17 +1,25 @@
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class YoungHumanV2Test {
   @Test
   public void weightCloneTest() {
+    String warning = "This test creates new Weight(5, 1) and its clone. \n";
+    try {
     Weight w1 = new Weight(5, 1);
-    Weight w2 = w1.clone();
+    Weight w2 = (Weight) w1.clone();
     assertTrue("This test creates new Weight(5, 1) and its clone. \n"
         + "They should equal (equals() should return true), but your return false.\n"
         ,w1.equals(w2));
     assertFalse("This test creates new Weight(5, 1) and its clone. \n"
         + "Your program fails this test because their references are identical, "
         + "you need return a clone copy, not itself.\n", w1 == w2);
+    } catch (Exception e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    } catch (Error e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    }
   }
   
   @Test
@@ -303,14 +311,21 @@ public class YoungHumanV2Test {
   
   @Test
   public void dateCloneTest() {
-    Date d1 = new Date(5, 1, 2021);
-    Date d2 = d1.clone();
-    assertTrue("This test creates new Date(5, 1, 2021) and its clone. \n"
-        + "They should equal (equals() should return true), but your return false\n"
-        ,d1.equals(d2));
-    assertFalse("This test creates new date(5, 1, 2021) and its clone. \n"
-        + "Your program fails this test because their references are identical,\n"
-        + "you need return a clone copy, not itself\n", d1 == d2);
+    String warning = "This test creates new Date(5, 1, 2021) and its clone.";
+    try {
+      Date d1 = new Date(5, 1, 2021);
+      Date d2 = (Date) d1.clone();
+      assertTrue("This test creates new Date(5, 1, 2021) and its clone. \n"
+          + "They should equal (equals() should return true), but your return false\n"
+          ,d1.equals(d2));
+      assertFalse("This test creates new date(5, 1, 2021) and its clone. \n"
+          + "Your program fails this test because their references are identical,\n"
+          + "you need return a clone copy, not itself\n", d1 == d2);
+    } catch (Exception e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    } catch (Error e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    }
   }
   
   @Test
@@ -426,19 +441,28 @@ public class YoungHumanV2Test {
   
   @Test
   public void youngHumanCloneTest() {
-    YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2021), 
-        "Lisa", "Simpson");
-    YoungHuman y2 = y1.clone();
-    assertTrue("This test creates "
+    String warning = "This test creates "
         + "new YoungHuman(Weight(45, 3), Date(3, 17, 2021), \"Lisa\", \"Simpson\") "
-        + "and its clone.\n"
-        + "They should equal (equals() should return true), but your return false\n"
-        ,y1.equals(y2));
-    assertFalse("This test creates "
-        + "new YoungHuman(Weight(45, 3), Date(3, 17, 2021), \"Lisa\", \"Simpson\") "
-        + "and its clone.\n"
-        + "Your program fails this test because their references are identical,\n"
-        + "you need return a clone copy, not itself\n", y1 == y2);
+        + "and its clone.\n";
+    try {
+      YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2021), 
+          "Lisa", "Simpson");
+      YoungHuman y2 = (YoungHuman) y1.clone();
+      assertTrue("This test creates "
+          + "new YoungHuman(Weight(45, 3), Date(3, 17, 2021), \"Lisa\", \"Simpson\") "
+          + "and its clone.\n"
+          + "They should equal (equals() should return true), but your return false\n"
+          ,y1.equals(y2));
+      assertFalse("This test creates "
+          + "new YoungHuman(Weight(45, 3), Date(3, 17, 2021), \"Lisa\", \"Simpson\") "
+          + "and its clone.\n"
+          + "Your program fails this test because their references are identical,\n"
+          + "you need return a clone copy, not itself\n", y1 == y2);
+    } catch (Exception e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    } catch (Error e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    }
   }
   
   @Test
