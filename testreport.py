@@ -262,7 +262,7 @@ def runWithMaven(scoresfile, defaultPoints):
 		echoAndRun("mvn clean compile test --quiet --no-transfer-progress --batch-mode --fail-never")
 		os.makedirs("out", exist_ok=True)
 		# also echo javac command to test compilation 
-		runCommand("javac", "src/main/java/*.java")
+		echoAndRun("javac src/main/java/*.java")
 		compiled, uncompiled = getCompilation()
 		if len(uncompiled) == 0:
 			printAndWrite(reportFile, "Found [{}].class file. Program compiled successfully. Tests can proceed:".format(",".join(compiled)))
