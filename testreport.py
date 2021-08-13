@@ -272,7 +272,7 @@ def runWithMaven(scoresfile, defaultPoints):
 			# get the javac output
 			print("=============================================================================\n")
 			# get error message from subprocess and write to report 
-			for javafile in compiled:
+			for javafile in uncompiled:
 				proc = subprocess.Popen(
 					["javac src/main/java/" + javafile + ".java"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
 				(out, err) = proc.communicate()
