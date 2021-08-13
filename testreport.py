@@ -253,8 +253,10 @@ def getCompilation():
 #	scoresfile = relative file path to the file containing individual test points 
 #	defaultPoints = default point value for each test assigned in main 
 def runWithMaven(scoresfile, defaultPoints):
+	if not os.path.exists("out/report.txt"):
+		os.makedirs("out")
 	# now writing new test report file in out/ folder 
-	with open("out/report.txt", "w") as reportFile:
+	with open("out/report.txt", "w+") as reportFile:
 		printDateTimeStart(reportFile)
 	
 		# now try to compile and test code with Maven 
