@@ -172,21 +172,19 @@ def writeTestReport(reportFile, resultFile, scoresList, tests, defaultPoints):
 		# list to hold student's scores by test, starts off with full points 
 		testPoints = {}
 
-		# if there are failed tests, parse through and collect failed test error messages 
-		if(totalTests != testsPassed):
-			for name, test in classTests.items():
-				result = test.result
-				if not len(result):
-					testPoints[name] = scoresList[name]
-					continue
-				result = result[0].text
-				em = "------------------------------------------------------------------------------\n"
-				em = em + " Test {}.{} has FAILED \n".format(test.classname, test.name)
-				em = em + "------------------------------------------------------------------------------\n"
-				em = em + "Time elapsed: {} s <<< FAILURE!\n".format(test.time)
-				em = em + result + "\n"
-				testPoints[name] = 0
-				errorMessages[name] = em
+		for name, test in classTests.items():
+			result = test.result
+			if not len(result):
+				testPoints[name] = scoresList[name]
+				continue
+			result = result[0].text
+			em = "------------------------------------------------------------------------------\n"
+			em = em + " Test {}.{} has FAILED \n".format(test.classname, test.name)
+			em = em + "------------------------------------------------------------------------------\n"
+			em = em + "Time elapsed: {} s <<< FAILURE!\n".format(test.time)
+			em = em + result + "\n"
+			testPoints[name] = 0
+			errorMessages[name] = em
 		#done parsing surefire report file 
 		inFile.close()
 
