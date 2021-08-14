@@ -467,25 +467,31 @@ public class YoungHumanV2Test {
   
   @Test
   public void youngHumanSetterTest() {
-    YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2021), 
-        "Lisa", "Simpson");
-    
-    y1.setBirthDate(new Date(2,10,2020));
-    y1.setWeight(new Weight(40, 7));
-    y1.setName("first", "last");
-    
     String warning = "This test creates "
         + "new YoungHuman(Weight(45, 3), Date(3, 17, 2021), \"Lisa\", \"Simpson\")"
         + "\nand calls: setBirthDate(new Date(2,10,2020)), setWeight(new Weight(40, 7)), "
         + "and setName(\"first\", \"last\").\n";
+    try {
+      YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2021), 
+          "Lisa", "Simpson");
+      
+      y1.setBirthDate(new Date(2,10,2020));
+      y1.setWeight(new Weight(40, 7));
+      y1.setName("first", "last");
+      
+      assertTrue(warning + " Weight should become (40, 7), but your is " 
+          + y1.getWeight() + "\n", (y1.getWeight()).equals(new Weight(40, 7)));
+      assertTrue(warning + " name should become \"first last\", but your is " 
+          + y1.getName() + "\n", (y1.getName()).equals("first last"));
+      //System.out.println(y1.getBirthDate());
+      assertTrue(warning + " birthDate should become (2, 10, 2020), but your is " 
+          + y1.getBirthDate() + "\n", (y1.getBirthDate()).equals(new Date(2,10,2020)));
+    } catch (Exception e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    } catch (Error e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    }
     
-    assertTrue(warning + " Weight should become (40, 7), but your is " 
-        + y1.getWeight() + "\n", (y1.getWeight()).equals(new Weight(40, 7)));
-    assertTrue(warning + " name should become \"first last\", but your is " 
-        + y1.getName() + "\n", (y1.getName()).equals("first last"));
-    //System.out.println(y1.getBirthDate());
-    assertTrue(warning + " birthDate should become (2, 10, 2020), but your is " 
-        + y1.getBirthDate() + "\n", (y1.getBirthDate()).equals(new Date(2,10,2020)));
   }
   
   @Test
@@ -519,20 +525,31 @@ public class YoungHumanV2Test {
   
   @Test
   public void youngHumanToStringTest() {
-    YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2014), 
-        "Lisa", "Simpson");
-    y1.setCheckUp(new Date(7,8,2021));
-    String output = "Lisa Simpson, 45 lbs. 3 oz, birth date: "
-        + "3/17/2014, last check-up: 7/8/2021";
-    System.out.println("\t\t" + y1.toString());
-    assertTrue("The correct toString() is: \"" + output + "\"\n, but your is: \"" 
-        + y1.toString() + "\".\nThis test will fail if you have any different "
-        + "characters,\nso if you have a similar answer, ignore this test case\n", 
-        output.equals(y1.toString()));
+    String warning = "This test creates a new YoungHuman(new Weight(45, 3), new Date(3,17,2014), "
+        + "\"Lisa\", \"Simpson\");\n"
+        + " and calls setCheckUp(new Date(7,8,2021))";
+    try {
+      YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2014), 
+          "Lisa", "Simpson");
+      y1.setCheckUp(new Date(7,8,2021));
+      String output = "Lisa Simpson, 45 lbs. 3 oz, birth date: "
+          + "3/17/2014, last check-up: 7/8/2021";
+      System.out.println("\t\t" + y1.toString());
+      assertTrue("The correct toString() is: \"" + output + "\"\n, but your is: \"" 
+          + y1.toString() + "\".\nThis test will fail if you have any different "
+          + "characters,\nso if you have a similar answer, ignore this test case\n", 
+          output.equals(y1.toString()));
+    } catch (Exception e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    } catch (Error e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    }
+    
   }
   
   @Test
   public void youngHumanToStringTest2() {
+    
     YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2014), 
         "John", "Smith");
     String output = "John Smith, 45 lbs. 3 oz, birth date: "
@@ -573,35 +590,47 @@ public class YoungHumanV2Test {
         + "Then, call y1.setBirthDate(new Date(4,17,2014)).\n"
         + "y1.equals(y2) should return false, but your return true\n";
     
-    YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2014), 
-        "Lisa", "Simpson");
-    
-    YoungHuman y2 = new YoungHuman(y1);
-    y1.setBirthDate(new Date(4,17,2014));
-    
-    assertFalse(warning, y1.equals(y2));
+    try {
+      YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2014), 
+          "Lisa", "Simpson");
+      
+      YoungHuman y2 = new YoungHuman(y1);
+      y1.setBirthDate(new Date(4,17,2014));
+      
+      assertFalse(warning, y1.equals(y2));
+    } catch (Exception e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    } catch (Error e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    }
   }
   
   @Test
   public void youngHumanPrivacyLeakTest() {
-    YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2014), 
-        "Lisa", "Simpson");
-    
     String warning = "This test creates y1 = new YoungHuman(new Weight(45, 3), "
         + "new Date(3,17,2014), \"Lisa\", \"Simpson\").\n";
+    try {
+      YoungHuman y1 = new YoungHuman(new Weight(45, 3), new Date(3,17,2014), 
+          "Lisa", "Simpson");
+      
+      Weight w1 = y1.getWeight();
+      y1.setWeight(new Weight(40, 7));
+      
+      assertTrue(warning + "Then call Weight w1 = y1.getWeight(); "
+          + "y1.setWeight(new Weight(40, 7));.\n Your w1 should be (45, 3), "
+          + "but it is: " + w1, w1.equals(new Weight(45, 3)));
+      
+      Date d1 = y1.getBirthDate();
+      y1.setBirthDate(new Date(2,10,2020));
+      
+      assertTrue(warning + "Then call Date d1 = y1.getBirthDate(); "
+          + "y1.setBirthDate(new Date(2,10,2020));.\n Your d1 should be (3,17,2014),"
+          + " but it is now: " + d1, d1.equals(new Date(3,17,2014)));
+    } catch (Exception e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    } catch (Error e) {
+      assertFalse(warning + "It crashes with a " + e.toString(),true);
+    }
     
-    Weight w1 = y1.getWeight();
-    y1.setWeight(new Weight(40, 7));
-    
-    assertTrue(warning + "Then call Weight w1 = y1.getWeight(); "
-        + "y1.setWeight(new Weight(40, 7));.\n Your w1 should be (45, 3), "
-        + "but it is: " + w1, w1.equals(new Weight(45, 3)));
-    
-    Date d1 = y1.getBirthDate();
-    y1.setBirthDate(new Date(2,10,2020));
-    
-    assertTrue(warning + "Then call Date d1 = y1.getBirthDate(); "
-        + "y1.setBirthDate(new Date(2,10,2020));.\n Your d1 should be (3,17,2014),"
-        + " but it is now: " + d1, d1.equals(new Date(3,17,2014)));
   }
 }
